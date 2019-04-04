@@ -10,10 +10,11 @@ python.mkDerivation {
   buildInputs = [py.pytest py.pytest-cov py.pytest-flake8 py.pytest-pylint py.pytest-runner];
   propagatedBuildInputs = [py.ConfigArgParse py.maya py.PyYAML py.requests pkgs.openssh pkgs.git];
   meta = {
-    homepage = "https://github.com/smarkets/marge-bot";
+    homepage = "https://github.com/GregBowyer/marge-bot";
     description = "A build bot for GitLab";
     license = with pkgs.lib.licenses; [bsd3] ;
     maintainers =  [
+      "Greg Bowyer <gbowyer@fastmail.co.uk>"
       "Alexander Schmolck <alexander.schmolck@smarkets.com>"
       "Jaime Lennox <jaime.lennox@smarkets.com>"
     ];

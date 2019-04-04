@@ -4,7 +4,7 @@ let callPackage = pkgs.lib.callPackageWith (pkgs);
     version = marge.version;
 in
 pkgs.dockerTools.buildImage {
-  name = "smarkets/marge-bot";
+  name = "gbowyer/marge-bot";
   tag = "${version}";
   # minimal user setup, so ssh won't whine 'No user exists for uid 0'
   runAsRoot = ''

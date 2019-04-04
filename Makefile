@@ -26,16 +26,11 @@ docker-push:
 	else \
 	  docker login; \
 	fi
-	docker tag smarkets/marge-bot:$$(cat version) smarkets/marge-bot:$(VERSION)
+	docker tag gbowyer/marge-bot:$$(cat version) gbowyer/marge-bot:$(VERSION)
 	if [ "$(VERSION)" = "$$(cat version)" ]; then \
-	  docker tag smarkets/marge-bot:$$(cat version) smarkets/marge-bot:latest; \
-	  docker tag smarkets/marge-bot:$$(cat version) smarkets/marge-bot:stable; \
-	  docker push smarkets/marge-bot:stable; \
-	  docker push smarkets/marge-bot:latest; \
+	  docker tag gbowyer/marge-bot:$$(cat version) gbowyer/marge-bot:latest; \
+	  docker tag gbowyer/marge-bot:$$(cat version) gbowyer/marge-bot:stable; \
+	  docker push gbowyer/marge-bot:stable; \
+	  docker push gbowyer/marge-bot:latest; \
 	fi
-	docker push smarkets/marge-bot:$(VERSION)
-	# for backwards compatibility push to previous location
-	docker tag smarkets/marge-bot:$$(cat version) smarketshq/marge-bot:latest
-	docker tag smarkets/marge-bot:$$(cat version) smarketshq/marge-bot:$(VERSION)
-	docker push smarketshq/marge-bot:$(VERSION)
-	docker push smarketshq/marge-bot:latest
+	docker push gbowyer/marge-bot:$(VERSION)
