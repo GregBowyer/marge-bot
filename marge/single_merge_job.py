@@ -48,6 +48,8 @@ class SingleMergeJob(MergeJob):
         while not updated_into_up_to_date_target_branch:
             self.ensure_mergeable_mr(merge_request)
             source_project, source_repo_url, _ = self.fetch_source_project(merge_request)
+            target_project = self.get_target_project(merge_request)
+
             try:
                 # NB. this will be a no-op if there is nothing to update/rewrite
 
@@ -72,7 +74,9 @@ class SingleMergeJob(MergeJob):
 
             self.maybe_reapprove(merge_request, approvals)
 
-            if source_project.only_allow_merge_if_pipeline_succeeds:
+            await_ci = (source_project.only_allow_merge_if_pipeline_succeeds or
+                        target_project.only_allow_merge_if_pipeline_succeeds)
+            if await_ci:
                 self.wait_for_ci_to_pass(merge_request, actual_sha)
                 time.sleep(2)
 

@@ -227,6 +227,15 @@ class MergeJob(object):
             )
         return source_project, remote_url, remote
 
+    def get_target_project(self, merge_request):
+        target_project = self._project
+        if merge_request.target_project_id != self._project.id:
+            target_project = Project.fetch_by_id(
+                merge_request.target_project_id,
+                api=self._api,
+            )
+        return target_project
+
     def get_source_project(self, merge_request):
         source_project = self._project
         if merge_request.source_project_id != self._project.id:
